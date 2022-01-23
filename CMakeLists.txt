@@ -5,4 +5,5 @@ include_directories( include )
 
 add_executable( autocomplete
                 src/Autocomplete.cpp
+                src/Database.cpp
                 src/IOManager.cpp )

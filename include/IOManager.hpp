@@ -1,16 +1,18 @@
 #ifndef IOMANAGER_HPP
 #define IOMANAGER_HPP
 #include <iostream>
-#include <istream>
-#include <ostream>
+#include <fstream>
 #include <string>
+#include "Database.hpp"
 
 class IOManager {
-    private:
-    
+//    private:
+
     public:
-        bool read_database_file(std::string filename);
-        std::string read_search(std::string substring);
-        void print_result(std::string result);
+        Database* read_database_file(std::string filename);
+        std::string input_term();
+        void print(std::string result);
+        unsigned error(unsigned code);
+        void close();
 };
 #endif //IOMANAGER_HPP
