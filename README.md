@@ -94,6 +94,25 @@ Neste segundo exemplo, a base de dados é `wiktionary.txt` e a string buscada fo
 
 Note que o programa não deve ser **case sensitive**. Ou seja, não deve fazer diferença se o usuário digita "São P", "são p", "SÃO P",  ou qualquer variação de maiúscula ou minúscula. A entrada do usuário deve ser convertida para um case qualquer (todas maiúsculas ou todas minúsculas), para facilitar a operação de busca na base de dados.
 
+# Feedback Checkin 1
+
+1. Projete ao menos as 3 classes principais propostas para o programa. Não precisa implementar, apenas os .h são suficientes. **ok**
+    - Ok, não entendi exatamente o motivo do query processor, os métodos dele poderiam ficar dentro do Database?
+
+2. Implemente a classe responsável por ler e armazenar as informações do banco de dados de entrada. **ok**
+    - Eu imaginava que a classe da base de dados que fosse responsável por carregar suas informações. Lembre que ela que é dona dos dados nesse caso, logo faz
+    sentido que ela mesma carregue e faça processamento do arquivo.
+   
+3. Escreva o main instanciando a do item 2 mostrando que ela funciona para carregar e armazenar as informações. **ok**
+    - Ok, embora a classe do item 2 não faça realmente muita coisa, o IOManager faz.
+
+4. Escreva parte da classe responsável pela interface com o usuário, de forma que o usuário consiga ao menos digitar a alguma palavra no loop principa, mostrando uma interface similar à interface sugerida na atividade 3.1. **ok**
+    - Ok, imagino que essa seja seu IOManager? Nesse caso sugiro que deixe ela mais responsável por imprimir e processar a entrada do usuário, e terceirize a parte de processamento
+    do banco de dados para a classe Database.
+
+5. Use a classe implementada em 4 no main, para mostrar que ela funciona. Não precisa realizar qualquer busca no banco, se a entrada do usuário estiver sendo recebida e impressa no terminal já conta para esse checkin. **ok**
+    - ok
+
 # Autorship
 
 The description of this programming assignment was taken from [Computer Sciecne at Pricenton University](http://introcs.cs.princeton.edu/java/assignments/autocomplete.html).
