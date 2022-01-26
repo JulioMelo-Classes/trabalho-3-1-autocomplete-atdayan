@@ -1,5 +1,6 @@
 #ifndef DATABASE_HPP
 #define DATABASE_HPP
+#include <string>
 #include <utility>
 #include <vector>
 #include "Result.hpp"
@@ -9,8 +10,10 @@ class Database {
         std::vector<std::pair<unsigned long, std::string>*> m_entries;
 
     public:
-        //Database(unsigned size);
-        Result query(std::string substring);
-        void add_entry(std::pair<unsigned long, std::string> *entry);
+        //Database(std::string filename);
+        bool read_file(std::string filename);
+        //Result query(std::string search_term);
+        void query(std::string search_term);
+        //void add_entry(std::pair<unsigned long, std::string> *entry);
 };
 #endif //DATABASE_HPP

@@ -1,5 +1,5 @@
-#include <iostream>
 #include <string>
+#include "Database.hpp"
 #include "IOManager.hpp"
 #include "QueryProcessor.hpp"
 
@@ -11,16 +11,18 @@ int main(int argc, char* argv[]) {
     if (argc < 2)
         return io.error(0);
 
-    if (!io.read_database_file(argv[1]))
+    Database db;
+    if (!db.read_file(argv[1]))
         return io.error(1);
 
     //QueryProcessor query_proc {io.get_database()};
     string term = "";
     do {
-        //Result result = query_proc.find_results(term);
-        //io.print(query_proc.query_results(term));
         term = io.input_term();
+        //Result result = db.query(term);
+        //io.print(result.results());
         // teste output
+        db.query(term);
         io.print("---> input: " + term);
     } while (term != "");
     io.close();
