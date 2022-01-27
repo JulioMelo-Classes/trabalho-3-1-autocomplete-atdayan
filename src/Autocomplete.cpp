@@ -19,11 +19,10 @@ int main(int argc, char* argv[]) {
     string term = "";
     do {
         term = io.input_term();
-        //Result result = db.query(term);
-        //io.print(result.results());
+        Result result = db.query(term);
+        io.print(result.results());
         // teste output
-        db.query(term);
-        io.print("---> input: " + term);
+        //io.print("---> input: " + term);
     } while (term != "");
     io.close();
 

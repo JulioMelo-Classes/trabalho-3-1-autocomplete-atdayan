@@ -6,6 +6,7 @@ include_directories( include )
 add_executable( autocomplete
                 src/Autocomplete.cpp
                 src/Database.cpp
-                src/IOManager.cpp )
+                src/IOManager.cpp
+                src/Result.cpp )
 
 set_property(TARGET autocomplete PROPERTY CXX_STANDARD 17)

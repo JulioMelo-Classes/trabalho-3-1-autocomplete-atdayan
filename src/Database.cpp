@@ -56,21 +56,35 @@ bool Database::read_file(string filename) {
                 });
 
         for (int i = 0; i < m_entries.size(); i++)
-            std::cout << i+1 << ": " << m_entries[i]->second << "\n";
+            std::cout << i << ": " << m_entries[i]->second << "\n";
 
         return true;
     }
     return false;
 }
 
-void Database::query(string search_term) {
+Result& Database::query(string search_term) {
     auto low = std::lower_bound(m_entries.begin(), m_entries.end(), search_term, [](auto e, string s) {
                 return e->second < s;
             });
-    auto up = std::upper_bound(m_entries.begin(), m_entries.end(), search_term, [](string s, auto e) {
-                return s < e->second;
+    auto up = std::upper_bound(m_entries.begin(), m_entries.end(), search_term+"{", [](string s, auto e) {
+                return e->second > s;
             });
 
-    std::cout << "low is: " << (low - m_entries.begin()) + 1 << "\n";
-    std::cout << "upper is: " << (up - m_entries.begin()) + 1 << "\n";
+    Result result;
+    std::for_each(low, up, [&result](auto e){
+                result.add_entry(e);
+                //std::cout << "=========>" << entry->second << '\n';
+            });
+
+    return result;
+    //std::cout << "low is: " << (low - m_entries.begin()) << "\n";
+    //std::cout << "upper is: " << (up - m_entries.begin()) << "\n";
+
+    //if (low == up)
+    //    std::cout << "No matches found.\n";
+    //else
+    //    std::for_each(low, up, [](auto entry){
+    //                std::cout << "=========>" << entry->second << '\n';
+    //            });
 }

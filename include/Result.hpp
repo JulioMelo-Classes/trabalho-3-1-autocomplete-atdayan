@@ -6,9 +6,10 @@
 
 class Result {
     private:
-        std::vector<std::pair<std::string, unsigned>> m_results;
+        std::vector<std::pair<unsigned long, std::string>*> m_results;
 
     public:
-        std::string results_by_relevance();
+        std::string results();
+        void add_entry(std::pair<unsigned long, std::string> *entry);
 };
 #endif //RESULT_HPP
