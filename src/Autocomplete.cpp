@@ -15,12 +15,11 @@ int main(int argc, char* argv[]) {
     if (!db.read_file(argv[1]))
         return io.error(1);
 
-    //QueryProcessor query_proc {io.get_database()};
     string term = "";
     do {
         term = io.input_term();
-        Result result = db.query(term);
-        io.print(result.results());
+        Result *result = db.query(term);
+        io.print(result->results());
         // teste output
         //io.print("---> input: " + term);
     } while (term != "");

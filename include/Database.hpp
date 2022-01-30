@@ -11,6 +11,6 @@ class Database {
 
     public:
         bool read_file(std::string filename);
-        Result& query(std::string search_term);
+        Result* query(std::string search_term);
 };
 #endif //DATABASE_HPP

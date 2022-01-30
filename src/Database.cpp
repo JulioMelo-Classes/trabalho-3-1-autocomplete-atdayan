@@ -6,7 +6,6 @@
 using std::pair, std::string;
 
 inline void prepare_string(std::string &s) {
-
     s.erase(s.begin(), std::find_if(s.begin(), s.end(),
                 [](unsigned char ch) {
                     return !std::isspace(ch);
@@ -22,25 +21,12 @@ inline void prepare_string(std::string &s) {
 }
 
 bool Database::read_file(string filename) {
-
     std::ifstream file {filename};
     if (file.is_open()) {
         string word;
         unsigned long file_size, weight;
 
         file >> file_size;
-
-        //std::cout << "file size: " << file_size << "\n";
-        //for (int i = 0; i < 10; i++) {
-        //    file >> weight;
-        //    std::getline(file, word);
-        //    prepare_string(word);
-
-        //    auto entry = new std::pair<unsigned long, string>(weight, word);
-        //    m_entries.push_back(entry);
-
-        // //   std::cout << "weight: " << entry->first << " | word: " << entry->second << "\n";
-        //}
 
         while (file >> weight) {
             std::getline(file, word);
@@ -55,36 +41,29 @@ bool Database::read_file(string filename) {
                     return (e1->second < e2->second);
                 });
 
-        for (int i = 0; i < m_entries.size(); i++)
-            std::cout << i << ": " << m_entries[i]->second << "\n";
-
         return true;
     }
     return false;
 }
 
-Result& Database::query(string search_term) {
-    auto low = std::lower_bound(m_entries.begin(), m_entries.end(), search_term, [](auto e, string s) {
+Result* Database::query(string search_term) {
+    auto low = std::lower_bound(m_entries.begin(), m_entries.end(), search_term,
+            [](auto e, string s) {
                 return e->second < s;
             });
-    auto up = std::upper_bound(m_entries.begin(), m_entries.end(), search_term+"{", [](string s, auto e) {
-                return e->second > s;
+    auto up = std::upper_bound(m_entries.begin(), m_entries.end(), search_term,
+            [](string s, auto e) {
+                return s < e->second.substr(0, s.length());
             });
 
-    Result result;
+    Result *result = new Result();
+
+    if (*low == *up)
+        return result;
+
     std::for_each(low, up, [&result](auto e){
-                result.add_entry(e);
-                //std::cout << "=========>" << entry->second << '\n';
+                result->add_entry(e);
             });
 
     return result;
-    //std::cout << "low is: " << (low - m_entries.begin()) << "\n";
-    //std::cout << "upper is: " << (up - m_entries.begin()) << "\n";
-
-    //if (low == up)
-    //    std::cout << "No matches found.\n";
-    //else
-    //    std::for_each(low, up, [](auto entry){
-    //                std::cout << "=========>" << entry->second << '\n';
-    //            });
 }
