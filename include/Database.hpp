@@ -1,5 +1,6 @@
 #ifndef DATABASE_HPP
 #define DATABASE_HPP
+#include <memory>
 #include <string>
 #include <utility>
 #include <vector>
@@ -7,10 +8,10 @@
 
 class Database {
     private:
-        std::vector<std::pair<unsigned long, std::string>*> m_entries;
+        std::vector<std::shared_ptr<std::pair<unsigned long, std::string>>> m_entries;
 
     public:
         bool read_file(std::string filename);
-        Result* query(std::string search_term);
+        std::unique_ptr<Result> query(std::string search_term);
 };
 #endif //DATABASE_HPP

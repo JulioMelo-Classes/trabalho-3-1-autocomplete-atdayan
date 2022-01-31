@@ -17,6 +17,6 @@ std::string Result::results() {
     return result_list;
 }
 
-void Result::add_entry(std::pair<unsigned long, std::string> *entry) {
+void Result::add_entry(std::shared_ptr<std::pair<unsigned long, std::string>> entry) {
     m_results.push_back(entry);
 }

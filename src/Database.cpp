@@ -29,7 +29,7 @@ bool Database::read_file(std::string filename) {
         while (file >> weight) {
             std::getline(file, word);
             prepare_string(word);
-            auto entry = new std::pair<unsigned long, std::string>(weight, word);
+            auto entry = std::make_shared<std::pair<unsigned long, std::string>>(weight, word);
             m_entries.push_back(entry);
         }
         file.close();
@@ -44,7 +44,7 @@ bool Database::read_file(std::string filename) {
     return false;
 }
 
-Result* Database::query(std::string search_term) {
+std::unique_ptr<Result> Database::query(std::string search_term) {
     auto low = std::lower_bound(m_entries.begin(), m_entries.end(), search_term,
             [](auto e, std::string s) {
                 return e->second < s;
@@ -54,7 +54,7 @@ Result* Database::query(std::string search_term) {
                 return s < e->second.substr(0, s.length());
             });
 
-    Result *result = new Result();
+    std::unique_ptr<Result> result = std::make_unique<Result>();
 
     if (*low == *up)
         return result;
