@@ -1,6 +1,7 @@
 #include <string>
 #include "Database.hpp"
 #include "IOManager.hpp"
+#include "Result.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -12,15 +13,13 @@ int main(int argc, char* argv[]) {
     if (!db.read_file(argv[1]))
         return io.error(1);
 
-    std::string term;
-    Result *result;
-    do {
-        term = io.input_term();
-        result = db.query(term);
+    std::string term = io.input_term();
+    while(!term.empty()) {
+        auto result = db.query(term);
         io.print(result->results());
-    } while (!term.empty());
+        term = io.input_term();
+    }
 
-    delete result;
     io.close();
 
     return EXIT_SUCCESS;

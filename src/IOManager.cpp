@@ -1,12 +1,28 @@
-#include <utility>
+#include <algorithm>
+#include <iostream>
 #include "IOManager.hpp"
+
+inline void prepare_string(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+                [](char ch) {
+                    return !std::isspace(ch);
+                }));
+    s.erase(std::find_if(s.rbegin(), s.rend(),
+                [](char ch) {
+                    return !std::isspace(ch);
+                }).base(), s.end());
+    std::transform(s.begin(), s.end(), s.begin(),
+                [](char ch){
+                    return std::tolower(ch);
+                });
+}
 
 std::string IOManager::input_term() {
     std::cout << ">>> Type a word and hit ENTER or Ctrl-D to quit: ";
     std::string term;
-    std::cin >> term;
-    if (term == "0")
+    if (!std::getline(std::cin, term))
         return "";
+    prepare_string(term);
     return term;
 }
 
@@ -31,7 +47,5 @@ unsigned IOManager::error(unsigned code) {
 }
 
 void IOManager::close() {
-    std::cout << "Bye.\n";
-    //m_database_file->close();
-    //delete m_database_file;
+    std::cout << "\nBye.\n";
 }

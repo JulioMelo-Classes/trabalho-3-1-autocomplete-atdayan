@@ -1,19 +1,18 @@
 #include <algorithm>
 #include <fstream>
-#include <iostream>
 #include "Database.hpp"
 
 inline void prepare_string(std::string &s) {
     s.erase(s.begin(), std::find_if(s.begin(), s.end(),
-                [](unsigned char ch) {
+                [](char ch) {
                     return !std::isspace(ch);
                 }));
     s.erase(std::find_if(s.rbegin(), s.rend(),
-                [](unsigned char ch) {
+                [](char ch) {
                     return !std::isspace(ch);
                 }).base(), s.end());
     std::transform(s.begin(), s.end(), s.begin(),
-                [](unsigned char ch){
+                [](char ch){
                     return std::tolower(ch);
                 });
 }
@@ -34,7 +33,6 @@ bool Database::read_file(std::string filename) {
         }
         file.close();
 
-        //sort entries in alphabetical order
         std::sort(m_entries.begin(), m_entries.end(), [](auto e1, auto e2) {
                     return (e1->second < e2->second);
                 });
