@@ -20,9 +20,16 @@ inline void prepare_string(std::string &s) {
 std::string IOManager::input_term() {
     std::cout << ">>> Type a word and hit ENTER or Ctrl-D to quit: ";
     std::string term;
+
     if (!std::getline(std::cin, term))
         return "";
+
+    while (term == "") {
+        std::cout << ">>> Type a word and hit ENTER or Ctrl-D to quit: ";
+        std::getline(std::cin, term);
+    }
     prepare_string(term);
+
     return term;
 }
 
