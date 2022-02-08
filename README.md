@@ -104,3 +104,37 @@ The description of this programming assignment was taken from [Computer Sciecne 
 
 &copy; DIMAp/UFRN 2021.
 &copy; IMD/UFRN 2021.
+
+# Avaliação
+
+## Ler e validar os argumentos da linha de comando | 8 / 10
+
+- Faltou só validar o conteúdo da base de dados.
+
+## Ler os dados da base de dados e armazená-los em uma classe apropriada | 10 / 10
+
+- ok
+
+## Separar a interface textual das demais classes do sistema concentrando os couts e cins em um único objeto | 10 / 10
+
+- ok
+
+## Implementação de uma classe para conter o resultado da requisição do usuário | 10 / 10
+
+- ok
+
+## Implementação eficiente através de referencias e algoritmos de busca binária | 10 / 10
+
+- ok.
+
+## Organização do código em src, include, data | 5 / 5
+
+- ok
+
+## Documentação do código usando o padrão doxygen | 5 / 5
+
+- ok
+
+## Implementação e documentação de arquivos de teste | 5 / 10
+
+- Você implementou algumas bases de dados adicionais, mas não forneceu casos de teste: Exemplos de entrada/saída nessas bases novas.
